@@ -1,0 +1,19 @@
+name: 🚀 Deploy backend event management testing on push
+on:
+  push:
+    branches:
+      - main
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code on branch main
+        uses: actions/checkout@v3
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER_TESTING }}
+          username: ${{ secrets.FTP_TESTING_USERNAME }}
+          password: ${{ secrets.FTP_TESTING_PASSWORD }}
